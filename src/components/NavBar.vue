@@ -8,12 +8,12 @@
 export default {
     computed: {
         userinfo() {
-            return this.$store.getters["auth/Userinfo"]
+            return this.$store.getters["auth/getUser"]
         },
     },
     created() {
         this.$store
-            .dispatch("auth/FetchUserInfo").catch(() => {
+            .dispatch("auth/fetchUser").catch(() => {
             });
     }
 }

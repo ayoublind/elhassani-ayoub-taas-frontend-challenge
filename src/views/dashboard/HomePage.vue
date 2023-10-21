@@ -1,14 +1,14 @@
 <template>
     <div class="md:container md:mx-auto">
-        <WelcomeLogo />
+        <repositories-list />
     </div>
 </template>
 <script>
-import WelcomeLogo from '@/components/common/WelcomeLogo.vue'
+import RepositoriesList from '@/components/github/RepositoriesList.vue'
 export default {
     name: "HomePage",
     components: {
-        WelcomeLogo
+        RepositoriesList
     }
 }
 </script>

@@ -9,6 +9,6 @@
 import Navbar from "@/components/NavBar";
 export default {
     name: "MainLayout",
-    components: { Navbar },
+    components: { Navbar }
 };
 </script>
