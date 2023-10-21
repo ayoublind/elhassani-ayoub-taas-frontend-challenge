@@ -11,22 +11,22 @@ export default {
         commits: []
     },
     actions: {
-        fetchAllRepos(context) {
-            return axios.get(`${config.github_api_endpoint}/user/repos`, {
+        async fetchAllRepos(context) {
+            return await axios.get(`${config.github_api_endpoint}/user/repos`, {
                 headers: {
                     'Authorization': 'token ' + context.rootState.auth.token
                 }
             })
                 .then(res => {
                     context.commit("setAllRepos", res.data);
-                    return res;
+                    return res.data;
                 })
                 .catch(err => {
                     return ErrorMessage(err);
                 });
         },
-        fetchAllBranchs(context) {
-            return axios.get(`${context.state.selectedRepo.url}/branches`)
+        async fetchAllBranchs(context) {
+            return await axios.get(`${context.state.selectedRepo.url}/branches`)
                 .then(res => {
                     context.commit("setAllBranches", res.data);
                     return res;
@@ -35,8 +35,8 @@ export default {
                     return ErrorMessage(err);
                 });
         },
-        fetchAllCommits(context, branch) {
-            return axios.get(`${context.state.selectedRepo.url}/commits`, {
+        async fetchAllCommits(context, branch) {
+            return await axios.get(`${context.state.selectedRepo.url}/commits`, {
                 params: {
                     sha: branch.name,
                 }
