@@ -20,5 +20,5 @@ npm run build
 npm run lint
 ```
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+### Notes :
+ - For The Tailwind css file warning it can be removed from vscode settings : https://byby.dev/at-rule-tailwind
