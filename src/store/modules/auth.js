@@ -9,8 +9,8 @@ export default {
         user: {}
     },
     actions: {
-        getAccessToken(context, code) {
-            return axios.post("/api/login/oauth/access_token", null, {
+        async getAccessToken(context, code) {
+            return await axios.post("/api/login/oauth/access_token", null, {
                 headers: { Accept: 'application/json' }, params: {
                     client_id: config.client_id,
                     client_secret: config.client_secret,
@@ -18,7 +18,6 @@ export default {
                 }
             })
                 .then(res => {
-                    console.log("Data From Auth:", res.data);
                     context.commit("setToken", res.data.access_token);
                     return res;
                 })
@@ -27,18 +26,22 @@ export default {
                 });
         },
         fetchUser(context) {
-            return axios.get(`${config.github_api_endpoint}/user`, {
-                headers: {
-                    'Authorization': 'token ' + context.state.token
-                }
-            })
-                .then(res => {
-                    context.commit("setUser", res.data);
-                    return res;
+            if (context.state.token) {
+                return axios.get(`${config.github_api_endpoint}/user`, {
+                    headers: {
+                        'Authorization': 'token ' + context.state.token
+                    }
                 })
-                .catch(err => {
-                    return ErrorMessage(err);
-                });
+                    .then(res => {
+                        context.commit("setUser", res.data);
+                        return res;
+                    })
+                    .catch(err => {
+                        return ErrorMessage(err);
+                    });
+            } else {
+                return ErrorMessage("No token");
+            }
         }
     },
     mutations: {

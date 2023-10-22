@@ -1,9 +1,11 @@
 <template>
     <div>
-        <div>
-            <h1 class="text-2xl font-semibold text-gray-800 dark:text-white">
-                {{ repository.full_name }}
-            </h1>
+        <div class="mb-2">
+            <a :href="repository.git_url" target="_blank">
+                <h1 class="text-2xl font-semibold text-gray-800 dark:text-white">
+                    {{ repository.full_name }}
+                </h1>
+            </a>
         </div>
         <branchs-list @selectBranch="handleBranchSelection" :branches="branches" />
         <!-- commits -->

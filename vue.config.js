@@ -9,13 +9,6 @@ module.exports = defineConfig({
         pathRewrite: {
           '^/api': '/'
         }
-      },
-      '^/api1': {
-        target: 'https://api.github.com',
-        changeOrigin: true,
-        pathRewrite: {
-          '^/api1': '/'
-        }
       }
     }
   },
