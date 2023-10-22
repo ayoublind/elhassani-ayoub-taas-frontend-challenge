@@ -7,6 +7,7 @@ import ContactPage from "@/views/public/ContactPage.vue"
 import AboutPage from "@/views/public/AboutPage.vue"
 import { loadLayoutMiddleware } from "@/middleware/loadLayoutMiddleware"
 import store from "@/store"
+import { nextTick } from "vue"
 
 const router = createRouter({
     mode: 'history',
@@ -16,6 +17,7 @@ const router = createRouter({
             path: "/home",
             component: HomePage,
             meta: {
+                title: 'Home Page | YouCan Gihub API',
                 layout: "MainLayout"
             }
         },
@@ -23,6 +25,7 @@ const router = createRouter({
             path: "/about",
             component: AboutPage,
             meta: {
+                title: 'About Page | YouCan Gihub API',
                 layout: "MainLayout"
             }
         },
@@ -30,6 +33,7 @@ const router = createRouter({
             path: "/contact",
             component: ContactPage,
             meta: {
+                title: 'Contact Page | YouCan Gihub API',
                 layout: "MainLayout"
             }
         },
@@ -37,6 +41,7 @@ const router = createRouter({
             path: "",
             component: AuthorisationPage,
             meta: {
+                title: 'Need Authorization First ! | YouCan Gihub API',
                 layout: "UnauthorizedLayout"
             }
         },
@@ -72,4 +77,9 @@ router.beforeEach((route) => {
         console.log("no code")
     }
 })
+router.afterEach((to) => {
+    nextTick(() => {
+        document.title = to.meta.title || 'YouCan Gihub API';
+    });
+});
 export default router

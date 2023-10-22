@@ -29,7 +29,7 @@ export default {
             return await axios.get(`${context.state.selectedRepo.url}/branches`)
                 .then(res => {
                     context.commit("setAllBranches", res.data);
-                    return res;
+                    return res.data;
                 })
                 .catch(err => {
                     return ErrorMessage(err);
